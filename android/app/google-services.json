@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "166057955364",
+    "project_id": "switchlink-7850e",
+    "storage_bucket": "switchlink-7850e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166057955364:android:10b75b12afe246f7a448b1",
+        "android_client_info": {
+          "package_name": "com.example.switchlink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU_YFF79CCywwgiBXTwpVay0dKD_oroeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

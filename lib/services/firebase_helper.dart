@@ -8,18 +8,19 @@ final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-// 🔹 Local Notification Show Function
+//  Local Notification Show Function
 Future<void> showNotification(RemoteMessage message) async {
-  const AndroidNotificationDetails androidDetails =
-      AndroidNotificationDetails(
+  const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
     "channel_id",
     "channel_name",
     importance: Importance.max,
     priority: Priority.high,
+    playSound: true,  // Ensure sound plays
+    sound: RawResourceAndroidNotificationSound('custom_notification'), // Custom Sound
+    
   );
 
-  const NotificationDetails platformDetails =
-      NotificationDetails(android: androidDetails);
+  const NotificationDetails platformDetails = NotificationDetails(android: androidDetails);
 
   await _flutterLocalNotificationsPlugin.show(
     0,
@@ -37,6 +38,9 @@ Future<void> showFirestoreNotification(String title, String description) async {
     "channel_name",
     importance: Importance.max,
     priority: Priority.high,
+    playSound: true, // Ensure sound plays
+    sound: RawResourceAndroidNotificationSound('custom_notification'), // No .mp3
+    
   );
 
   const NotificationDetails platformDetails =
@@ -108,7 +112,7 @@ Future<void> setupFCM() async {
     print("User Opened Notification: ${message.notification?.title}");
   });
 
-  // 🔹 Firestore Changes Listen Kare
+  // Firestore Changes Listen Kare
   FirebaseFirestore.instance
       .collection('notifications')
       .snapshots()
@@ -118,7 +122,7 @@ Future<void> setupFCM() async {
     for (var doc in snapshot.docChanges) {
       if (doc.type == DocumentChangeType.added) {
         String? documentEmail = doc.doc['email'];  
-        // 🔹 Sirf tabhi notification bhejo jab dono emails match kare
+        // Sirf tabhi notification bhejo jab dono emails match kare
         if (currentUserEmail != null && documentEmail != null && currentUserEmail == documentEmail) {
           log("currentEmail: ${currentUserEmail}");
           log("documentEmail: ${documentEmail}");
